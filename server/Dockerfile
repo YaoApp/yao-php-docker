@@ -252,6 +252,17 @@ RUN cd /tmp && \
     echo ";yaml-ext" >> /usr/local/lib/php.ini && \
 	echo "extension=yaml.so" >> /usr/local/lib/php.ini
 #
+# Mongodb
+#
+RUN cd /tmp && \
+    tar xfz /download/mongodb-1.7.3.tgz && \
+    cd mongodb-1.7.3  && \
+    /usr/local/bin/phpize && \
+    CFLAGS="-O3 -fPIC"  ./configure --with-php-config=/usr/local/bin/php-config && \
+    CFLAGS="-O3 -fPIC"  make && make install && \
+    echo ";mongodb-ext" >> /usr/local/lib/php.ini && \
+	echo "extension=mongodb.so" >> /usr/local/lib/php.ini
+#
 # Apcu
 #
 RUN cd /tmp && \
